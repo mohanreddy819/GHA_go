@@ -22,25 +22,55 @@ jobs:
         #   uses: golangci/golangci-lint-action@v5
           # with:
           #   version: v1.58.1
-    Deploy:
-        runs-on: ubuntu-latest
-        strategy:
-          matrix:
-            go-version: ['1.23', '1.24']
-        needs: build
-        steps:
-            - name: Chceckout Code
-              uses: actions/checkout@v4
-            - name: Set up Go
-              uses: actions/setup-go@v5
-              with:
-                go-version: ${{ matrix.go-version }}
-            - name: install the required dependencies
-              run: go mod download
-            - name: Run tests
-              run: go test ./... -v
+        - name: Build 
+          run: go build -v ./...
+        - name: install the required dependencies
+          run: go mod download
+        - name: Run tests
+          run: go test ./... -v
             
-
+# name: Test build for golang
+# on:
+#     push:
+#         branches:
+#             - main
+# jobs:
+#     build:
+#       runs-on: ubuntu-latest
+#       strategy:
+#         matrix:
+#           go-version: ['1.23', '1.24']
+#       steps:
+#         - name: Chceckout Code
+#           uses: actions/checkout@v4
+#         - name: Set up Go
+#           uses: actions/setup-go@v5
+#           with:
+#             go-version: ${{ matrix.go-version }}
+#         - name: display the installed version
+#           run: go version 
+#         # - name: Run golangci-lint
+#         #   uses: golangci/golangci-lint-action@v5
+#           # with:
+#           #   version: v1.58.1
+#     Deploy:
+#       name: Deploy 
+#       runs-on: ubuntu-latest
+#       strategy:
+#         matrix:
+#           go-version: ['1.23', '1.24']
+#       needs: build
+#       steps:
+#         - name: Chceckout Code
+#           uses: actions/checkout@v4
+#         - name: Set up Go
+#           uses: actions/setup-go@v5
+#           with:
+#             go-version: ${{ matrix.go-version }}
+#         - name: install the required dependencies
+#           run: go mod download
+#         - name: Run tests
+#           run: go test ./... -v
 # name: Test build for golang
 # on:
 #     push:
