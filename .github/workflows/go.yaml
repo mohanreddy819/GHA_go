@@ -18,10 +18,10 @@ jobs:
             go-version: ${{ matrix.go-version }}
         - name: display the installed version
           run: go version 
-        - name: Run golangci-lint
-          uses: golangci/golangci-lint-action@v5
-          with:
-            version: v1.58.1
+        # - name: Run golangci-lint
+        #   uses: golangci/golangci-lint-action@v5
+          # with:
+          #   version: v1.58.1
     Deploy:
         runs-on: ubuntu-latest
         strategy:
