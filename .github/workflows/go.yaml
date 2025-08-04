@@ -17,4 +17,6 @@ jobs:
               run: go version 
             - name: install the required dependencies
               run: go mod download
+            - name: Run tests
+              run: go test ./... -v
             
